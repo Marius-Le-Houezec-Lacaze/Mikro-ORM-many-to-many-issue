@@ -1,0 +1,206 @@
+{
+  "namespaces": [],
+  "tables": [
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        }
+      },
+      "name": "building",
+      "indexes": [
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "buildingId": {
+          "name": "buildingId",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "integer"
+        }
+      },
+      "name": "clientCompany",
+      "indexes": [
+        {
+          "columnNames": [
+            "buildingId"
+          ],
+          "composite": false,
+          "keyName": "clientCompany_buildingId_unique",
+          "primary": false,
+          "unique": true
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "clientCompany_buildingId_foreign": {
+          "constraintName": "clientCompany_buildingId_foreign",
+          "columnNames": [
+            "buildingId"
+          ],
+          "localTableName": "clientCompany",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "building",
+          "updateRule": "cascade"
+        }
+      }
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "username": {
+          "name": "username",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "string"
+        }
+      },
+      "name": "user",
+      "indexes": [
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {}
+    },
+    {
+      "columns": {
+        "userId": {
+          "name": "userId",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "clientCompanyId": {
+          "name": "clientCompanyId",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "integer"
+        }
+      },
+      "name": "userHasClientCompany",
+      "indexes": [
+        {
+          "columnNames": [
+            "userId"
+          ],
+          "composite": false,
+          "keyName": "userHasClientCompany_userId_index",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "clientCompanyId"
+          ],
+          "composite": false,
+          "keyName": "userHasClientCompany_clientCompanyId_index",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "userId",
+            "clientCompanyId"
+          ],
+          "composite": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "userHasClientCompany_userId_foreign": {
+          "constraintName": "userHasClientCompany_userId_foreign",
+          "columnNames": [
+            "userId"
+          ],
+          "localTableName": "userHasClientCompany",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "user",
+          "updateRule": "cascade"
+        },
+        "userHasClientCompany_clientCompanyId_foreign": {
+          "constraintName": "userHasClientCompany_clientCompanyId_foreign",
+          "columnNames": [
+            "clientCompanyId"
+          ],
+          "localTableName": "userHasClientCompany",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "clientCompany",
+          "updateRule": "cascade"
+        }
+      }
+    }
+  ]
+}
